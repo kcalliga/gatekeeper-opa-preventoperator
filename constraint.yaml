@@ -1,0 +1,8 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: AllowOperators
+metadata:
+  name: allow-some-operators
+spec:
+  operators:
+    - "nginx-operator"
+    - "prometheus-operator"
