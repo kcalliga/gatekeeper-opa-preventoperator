@@ -6,3 +6,5 @@ spec:
   operators:
     - "nginx-operator"
     - "prometheus-operator"
+    namespaces:
+    - "allowed-namespace"
