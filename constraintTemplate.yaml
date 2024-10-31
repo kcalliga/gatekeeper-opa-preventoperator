@@ -1,0 +1,29 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: preventoperators
+spec:
+  crd:
+    spec:
+      names:
+        kind: PreventOperators
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            operators:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package preventoperators
+
+        violation[{"msg": msg}] {
+          input.request.kind.kind == "ClusterServiceVersion"
+          input.request.operation == "CREATE"
+          operators := data.preventoperators.operators
+          msg := sprintf("The operator %v is not allowed to be installed.", [input.request.object.metadata.name])
+          input.request.object.metadata.name in operators
+        }
