@@ -4,7 +4,6 @@ metadata:
   name: allow-some-operators
 spec:
   operators:
-    - "nginx-operator"
-    - "prometheus-operator"
+    - "openshift-cert-manager-operator.default"
     namespaces:
     - "allowed-namespace"
