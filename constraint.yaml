@@ -13,4 +13,4 @@ spec:
     allowedOperators:
       - "nginx-ingress-operator"
     allowedSources:
-      - "certified-opeators"
+      - "certified-operators"
