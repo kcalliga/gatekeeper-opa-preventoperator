@@ -1,9 +1,16 @@
-apiVersion: templates.gatekeeper.sh/v1
-kind: AllowOperators
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: OperatorAllowList
 metadata:
-  name: allow-some-operators
+  name: my-operator-allow-list
 spec:
-  operators:
-    - "openshift-cert-manager-operator.default"
+  match:
+    kinds:
+      - apiGroups: ["operators.coreos.com"]
+        kinds: ["Subscription"]
     namespaces:
-    - "allowed-namespace"
+      - "keith-operator-test"
+  parameters:
+    allowedOperators:
+      - "nginx-ingress-operator"
+    allowedSources:
+      - "certified-opeators"
